@@ -1,0 +1,206 @@
+{% load static %}
+
+<!DOCTYPE html>
+<html>
+  <head>
+    <link
+      rel="stylesheet"
+      href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css"
+      
+    />
+
+    <!-- Compiled and minified CSS -->
+    <!--<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/css/materialize.min.css"> -->
+    <link
+      href="https://fonts.googleapis.com/icon?family=Material+Icons"
+      rel="stylesheet"
+    />
+
+    <link rel="stylesheet" href="{% static 'web/style.css' %}" />
+    
+    <link rel="stylesheet" type="text/css" href="/static/admin/css/forms.css">
+
+
+  </head>
+<body data-admin-utc-offset="0" cz-shortcut-listen="true">
+  <nav class="navbar navbar-dark bg-primary navbar-expand-lg">
+    <div class="mx-2">
+      <a
+        href="/"
+        class="navbar-brand"
+        style="margin-left: 10px; margin-right: 10px"
+      >
+        <i class="large material-icons">home</i>
+      </a>
+    </div>
+
+    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+      <ul class="navbar-nav mr-auto bd-navbar-nav">
+        {% if user.is_authenticated%}
+        <!--<li class="nav-item dropdown">
+          <a
+            class="nav-link dropdown-toggle active"
+            id="navbarDropdown"
+            role="button"
+            data-toggle="dropdown"
+            aria-haspopup="true"
+            aria-expanded="false"
+          >
+            Database
+          </a>
+          <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+            <a class="dropdown-item" href="/man_sel">Produttori/Fornitori</a>
+            <div class="dropdown-divider"></div>
+            <a class="dropdown-item" href="/frasi">Frasi H-P</a>
+            <a class="dropdown-item" href="/pittogrammi">Pittogrammi</a>
+            <a href="/fasi" class="dropdown-item">Fasi di produzione</a>
+          </div>
+        </li>-->
+
+        <li class="nav-item active">
+          <a class="nav-link" href="/tests">Test Chimici</a>
+        </li>
+
+        <li class="nav-item active">
+          <a class="nav-link" href="/man_sel">Produttori/Fornitori</a>
+        </li>
+
+        <li class="nav-item active">
+          <a class="nav-link" href="/frasi">Frasi H-P</a>
+        </li>
+
+        <li class="nav-item active">
+          <a class="nav-link" href="/pittogrammi">Pittogrammi</a>
+        </li>
+
+        <li class="nav-item active">
+          <a class="nav-link"href="/fasi" class="dropdown-item">Fasi di produzione</a>
+        </li>
+        <li class="nav-item active">
+          <a class="nav-link"href="/certificazioni" class="dropdown-item">Certificazioni</a>
+        </li>
+        <li class="nav-item active">
+          <a class="nav-link"href="/gateway" class="dropdown-item">Gateway ZDHC</a>
+        </li>
+        {% endif%}
+      </ul>
+
+      <div>
+        <ul class="navbar-nav mr-auto">
+          <li class="nav-item">
+            {% if user.is_authenticated%}
+
+            <a class="nav-item nav-link" href="{%url 'logout'%}">Logout</a>
+            {% else %}
+            <a class="nav-item nav-link" href="{%url 'login'%}">Login</a>
+            {%endif%}
+          </li>
+        </ul>
+      </div>
+    </div>
+  </nav>
+
+  <div class="" style="margin:5%">
+    {% block content %}{% endblock %}
+  </div>
+</body>
+  
+  
+  <script src="/static/admin/js/vendor/jquery/jquery.js"></script>
+  <script src="/static/admin/js/jquery.init.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/js/materialize.min.js"></script>
+  
+
+  <script>
+    document.addEventListener("DOMContentLoaded", () => {
+      const rows = document.querySelectorAll("tr[data-href]");
+
+      rows.forEach((row) => {
+        row.addEventListener("click", () => {
+          window.location.href = row.dataset.href;
+        });
+      });
+    });
+  </script>
+
+  <script>
+    var elm=document.getElementsByTagName("select");
+    if(elm.length>0){
+    for(var e=0; e<elm.length; e=e+1){
+    var id='#'+elm[e].id; 
+      var sel = $(id);
+    var selected = sel.val(); // cache selected value, before reordering
+    var opts_list = sel.find('option');
+    opts_list.sort(function(a, b) { return $(a).text() > $(b).text() ? 1 : -1; });
+    sel.html('').append(opts_list);
+    sel.val(selected); // set cached selected value
+    }}
+
+    var elm1=document.getElementsByClassName("riordina");
+    function sortTable(table) {
+      var  rows, sorted, i, x, y, sortFlag;
+      sorted = true;
+      while (sorted) {
+         sorted = false;
+         rows = table.rows;
+         for (i = 1; i < rows.length - 1; i++) {
+            sortFlag = false;
+            x = rows[i].getElementsByTagName("TD")[0];
+            y = rows[i + 1].getElementsByTagName("TD")[0];
+            if (x.innerHTML.toLowerCase() > y.innerHTML.toLowerCase()) {
+               sortFlag = true;
+               break;
+            }
+         }
+         if (sortFlag) {
+            rows[i].parentNode.insertBefore(rows[i + 1], rows[i]);
+            sorted = true;
+         }
+      }
+   }
+   for(var e=0; e<elm1.length; e=e+1){
+     sortTable(elm1[e])
+   }
+  </script>
+  {% block scripts %} {% endblock %}
+  <!--
+  <script
+    src="https://code.jquery.com/jquery-3.5.1.slim.min.js"
+    
+    integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj"
+    crossorigin="anonymous"
+  ></script>-->
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+  <script
+    src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js"
+    integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo"
+    crossorigin="anonymous"
+  ></script>
+  <script
+    src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/js/bootstrap.min.js"
+    integrity="sha384-OgVRvuATP1z7JjHLkuOU7Xw704+h835Lr+6QL9UvYjZE3Ipu6Tp75j7Bh/kR0JKI"
+    crossorigin="anonymous"
+  ></script>
+
+  <script
+    src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.3/umd/popper.min.js"
+    integrity="sha384-ZMP7rVo3mIykV+2+9J3UJ46jBk0WLaUAdn689aCwoqbBJiSnjAK/l8WvCWPIPm49"
+    crossorigin="anonymous"
+  ></script>
+</html>
+
+<!--
+    <div>
+      <ul class="navbar-nav mr-auto">
+
+        <li class="nav-item">
+
+          {% if user.is_authenticated%}
+
+            <a class="nav-item nav-link" href="{%url 'logout'%}">Logout</a>
+            {% else %}
+              <a class="nav-item nav-link" href="{%url 'login'%}">Login</a>
+          {%endif%}
+        </li>
+      </ul>
+    </div>-->

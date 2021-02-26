@@ -1,0 +1,67 @@
+{% extends "product/index.html" %}
+
+
+
+{% block content%}
+
+<div class="row">
+<div class="col">
+<h3>Test Chimici</h3>
+</div>
+<form method="GET">{%for f in filter.form%}
+  {{f}}
+  {%endfor%}
+  <button type="submit">filtra</button>
+  {%if filter.form != null%}
+
+          <a href="/" class="btn btn-danger">elimina filtri</a>
+          {% endif %}
+  </form>
+<div class="col">
+<nav class="nav justify-content-end nav-pills my-2" >
+  <a class="nav-link active" href="/tests/create_test">Nuovo</a>
+</nav>
+</div>
+</div>
+
+<hr/>
+
+
+
+<table class="table table-hover table-bordered table-striped">
+        <thead>
+
+          <tr>
+            <th>Data</th>
+            <th>Codice</th>
+            <th>Prodotto</th>
+            <th>Descrizione</th>
+            <th>Scadenza <br> Rapporto</th>
+          </tr>
+        </thead>
+
+<tbody>
+{% for o in filter.qs%}
+    <tr class='clickable-row' data-href="item/{{o.id}}">
+        <td>{{o.t_date}}</td>
+        <td>{{o.product.cod}}</td>
+        <td>{{o.product.nome}}</td>
+        <td>{{o.descr}}</td>
+        <td>{{o.scadenza_rapporto}}</td>
+        <td class="" style="padding:0px">
+              <button class="btn" style="padding:0; color:blue;"> <a href="item/{{o.id}}/update" class="text-secondary"><div class="mt-2 pt-1 mr-1 ml-2">
+                <span class="material-icons">create</span></div>
+              </a></button>
+            </td>
+        <td style="padding:0px"><form action="{% url 'delete_test' pk=o.id %}" method="POST" style="padding:0px">
+                {% csrf_token %}
+                <button class="btn" type="submit" style="padding:0; color:red;"><div class="mt-2 pt-1 mr-1 ml-2">
+                <span class="material-icons">delete</span></div></button>
+                <!--<input class="btn btn-default btn-danger" type="submit" value="Delete"/>-->
+              </form>
+              </td>
+    </tr>
+{% endfor %}
+</tbody>
+</table>
+{% endblock %}

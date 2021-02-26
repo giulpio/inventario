@@ -1,0 +1,116 @@
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+.navbar li {
+  list-style-type: none;
+}
+
+.riga1 {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+  /*justify-items: center;*/
+  align-items: center;
+  align-content: center;
+}
+.a {
+  grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+}
+
+.form-group {
+  margin: 20px;
+}
+
+.img-card {
+  padding: 10px;
+}
+
+.nav1 {
+  display: grid;
+  grid-template-columns: 70% 15% 15%;
+}
+
+.form-riga {
+  display: flex;
+  margin: 1em 0;
+  border-bottom: 1px solid #eee;
+}
+
+.form-input {
+  padding-right: 4em;
+
+  padding-bottom: 1em;
+  flex-grow: 1;
+}
+
+.form-riga.centered {
+  justify-content: start;
+}
+
+.aligned .form-input label {
+  width: auto;
+  margin-bottom: 0;
+}
+
+.form-textfield {
+  height: 4em;
+  max-width: 50%;
+}
+
+input,
+select,
+textarea {
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  margin-top: 4px;
+  font-size: 14px;
+  color: #555;
+}
+
+.content {
+  margin: auto;
+  max-width: 1280px;
+  border: 1px solid #999;
+  border-radius: 8px;
+  padding: 2%;
+}
+
+p.file-upload {
+  line-height: 20px;
+  margin: 0;
+  padding: 0;
+  color: #666;
+  font-size: 11px;
+  font-weight: bold;
+}
+
+.file-upload input {
+  font-size: 12px;
+  border: 0;
+}
+
+span.clearable-file-input label {
+  color: #333;
+  font-size: 11px;
+  display: inline;
+  float: none;
+}
+
+.file-upload label {
+  color: #333;
+  font-size: 11px;
+  display: inline;
+  float: none;
+  font-weight: lighter;
+}
+
+.form-riga label {
+  font-weight: bold;
+}
+
+.help {
+  font-size: 11px;
+  color: #999;
+}

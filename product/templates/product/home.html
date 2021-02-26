@@ -1,0 +1,244 @@
+{% extends "product/index.html" %} {% block content%}
+
+<!--<img src="/static/logo-cervotessile-black.png" alt="">-->
+
+<div class="row">
+  <div class="col">
+    <h3>Inventario Chimico</h3>
+  </div>
+  <div class="col">
+    <nav class="nav justify-content-end nav-pills my-2">
+      {% if user.is_authenticated%}
+      <a class="nav-link active" href="/create_product">Crea</a>
+      {%endif %}
+      <button
+        class="btn btn-info mx-1"
+        type="button"
+        data-toggle="collapse"
+        data-target="#collapseFilter"
+        aria-expanded="false"
+        aria-controls="collapseExample"
+      >
+        Filtra
+      </button>
+    </nav>
+  </div>
+</div>
+
+<hr />
+
+<div class="collapse mb-2" id="collapseFilter">
+  <div class="card card-body bg-light" style="padding: 0%;">
+    <form method="GET">
+      <div class="row form-group">
+        <div class="col-3">
+          <div class="row ml-1" style="margin-top: 2%;"><span>Codice:</span></div>
+          <div class="row ml-1 add_form_control">{{filter.form.cod}}</div>
+          <div class="row ml-1" style="margin-top: 2%;"><span>Fornitore:</span></div>
+          <div class="row ml-1 add_form_control">{{filter.form.fornitore}}</div>
+        </div>
+
+        <div class="col-3">
+          <div class="row ml-1" style="margin-top: 2%;"><span>Nome:</span></div>
+          <div class="row ml-1 add_form_control">{{filter.form.nome}}</div>
+          <div class="row ml-1" style="margin-top: 2%;"><span>Produttore:</span></div>
+          <div class="row ml-1 add_form_control">{{filter.form.produttore}}</div>
+        </div>
+        
+        <div class="col-2">
+          <div class="row ml-1" style="margin-top: 2%;"><span>Frasi H:</span></div>
+          <div class="row ml-1 add_form_control">{{filter.form.frasi_h}}</div>
+        </div>
+
+        <!--<div class="col-2">{{filter.form.frasi_p}}</div>-->
+        <div class="col-3">
+          <div class="row ml-1" style="margin-top: 2%;"><span>Fasi di Produzione:</span></div>
+          <div class="row ml-1 add_form_control">{{filter.form.fasi_produzione}}</div>
+        </div>
+        <div class="col-3">
+          <div class="row ml-1" style="margin-top: 2%;"><span>Stato:</span></div>
+          <div class="row ml-1 add_form_control">{{filter.form.stato_arte}}</div>
+        </div>
+        
+
+        <div align="right" class="col-12 align-self-end justify-content-end" style="margin-top: 2%;">
+          <button type="submit" class="btn btn-primary">cerca</button>
+          {%if filter.form != null%}
+
+          <a href="/" class="btn btn-danger">elimina filtri</a>
+          {% endif %}
+        </div>
+      </div>
+    </form>
+  </div>
+</div>
+<!--
+{% comment %}
+<form method="GET">
+  <input
+    type="text"
+    class="form-control"
+    name="nome__icontains"
+    id="id_nome__icontains"
+    placeholder="cerca per nome"
+    value="{{filter.form.nome__icontains.value}}"
+  />
+  <input
+    type="text"
+    class="form-control"
+    name="cod__iexact"
+    id="id_cod__iexact"
+    placeholder="nome contiene"
+    value="{{ filter.form.cod__iexact.value }}"
+  />
+
+  <select
+    class="form-control"
+    name="{{filter.form.produttore.name}}"
+    placeholder=""
+    id="{{filter.form.produttore.id}}"
+    value=""
+  ></select>
+
+  {{filter.form.produttore.as_table}}
+
+  <button type="submit" class="btn btn-primary">cerca</button>
+</form>
+<hr />
+{% endcomment %}-->
+
+<table class="table table-hover table-bordered table-striped">
+  <thead>
+    <tr>
+      <th>&nbsp;</th>
+      <th>Numero Articolo</th>
+      <th>Produttore</th>
+      <th>Fornitore</th>
+      <th>Nome Articolo</th>
+      <th>Classe Chimica</th>
+      <th>Fasi di Produzione</th>
+    </tr>
+  </thead>
+
+  <tbody>
+    {% comment %} {% for p in object_list %} {% endcomment %} 
+    {% for p in filter.qs %}
+    <tr class="clickable-row" data-href="/item/{{p.id}}">
+      <td class="stato">{{p.stato_arte}}</td>
+      <td>{{p.cod}}</td>
+      <td>{{p.produttore}}</td>
+      <td>{{p.fornitore}}</td>
+      <td>{{p.nome}}</td>
+      <td>{{p.classe}}</td>
+
+      <td>
+        {% for f in p.fasi_produzione.all%}
+        <span class="badge badge-pill badge-primary">{{f.name}}</span>
+        {% endfor %}
+      </td>
+      {% if user.is_authenticated%}
+      <td class="p-0">
+        <button class="btn" style="padding: 0; color: blue">
+          <a href="/item/{{p.id}}/update" class="text-secondary"
+            ><div class="mt-2 pt-1 mr-1 ml-2">
+              <span class="material-icons">create</span>
+            </div>
+          </a>
+        </button>
+      </td>
+      
+      <td class="p-0">
+        <!--
+        <form action="{% url 'delete_product' pk=p.id %}" method="POST">
+          {% csrf_token %}
+          <button class="btn" type="submit" style="padding: 0; color: red">
+            <div class="mt-2 pt-1 mr-1 ml-2">
+              <span class="material-icons">delete</span>
+            </div>
+          </button>
+          
+        </form>-->
+        <button class="btn" type="submit" style="padding: 0; color: red"  value="{{p.id}}" onclick="myf({{p.id}})">
+          <div class="mt-2 pt-1 mr-1 ml-2">
+            <span class="material-icons">delete</span>
+            </div>
+          </button>
+        
+      </td>
+     <!-- <td class="p-0">
+        
+          
+          <button class="btn" type="submit" style="padding: 0; color: red"  value="{{p.id}}" onclick='myf({{p.id}})'>
+            <div class="mt-2 pt-1 mr-1 ml-2">
+              
+              <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-archive-fill" viewBox="0 0 16 16">
+                <path d="M12.643 15C13.979 15 15 13.845 15 12.5V5H1v7.5C1 13.845 2.021 15 3.357 15h9.286zM5.5 7h5a.5.5 0 0 1 0 1h-5a.5.5 0 0 1 0-1zM.8 1a.8.8 0 0 0-.8.8V3a.8.8 0 0 0 .8.8h14.4A.8.8 0 0 0 16 3V1.8a.8.8 0 0 0-.8-.8H.8z"/>
+              </svg>
+            </div>
+          </button>
+          
+      </td>-->
+      {% endif %}
+    </tr>
+
+    {% endfor %}
+  </tbody>
+</table>
+
+{%endblock content%} {% block scripts %}
+
+
+<script>
+
+var els=document.getElementsByClassName("stato")
+
+for( var e=0; e<els.length; e=e+1){
+    if (els[e].innerHTML == "ON"){
+      var color='#18ce5e';
+    } else if(els[e].innerHTML== "PROVA"){
+      color='#ffef05'
+      } else if(els[e].innerHTML== "OFF"){
+      color='#db1811'
+      }
+        els[e].value=els[e].innerHTML;
+        els[e].innerHTML = "<svg width='16' height='16' fill='currentColor' class='bi bi-circle-fill' viewBox='0 0 16 16'><circle cx='8' cy='8' r='8' color='" + color + "'/></svg>"
+    }
+
+
+  var a=document.getElementsByClassName('add_form_control');
+
+  for(var i=0; i<a.length; i++){
+    a[i].firstElementChild.classList.add("form-control");
+  }
+
+</script>
+
+
+<script>
+    function myf(id){
+      var username = id;
+      console.log(username)
+      var active = "PROVA"; // or false, you have to set it
+      //var active =  // you have to set it
+      $.ajax({
+        url: '/ajax/change_status/',
+        data: {
+          //'csrfmiddlewaretoken': $('input[name="csrfmiddlewaretoken"]').val(),
+          'active': active,
+          'r_id': username
+        },
+        dataType: 'json',
+        success: function (data) {
+          if (data.success) {
+            alert("Prodotto Archiviato");
+            // here you update the HTML to change the active to innactive
+          }else{
+            alert("Prodotto NON archiviato");
+          }
+        }
+      });
+    }
+  </script>
+
+{% endblock scripts %}
+

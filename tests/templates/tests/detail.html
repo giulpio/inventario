@@ -1,0 +1,174 @@
+{% extends "product/index.html" %} {% block content%}
+
+<nav class="nav justify-content-end nav-pills my-2">
+    {% if user.is_authenticated%}
+  <!-- elimina e modifica vanno limitati agli utenti amministratori! -->
+  <!--<a class="nav-link badge-warning mx-1" href="/tests/item/{{object.id}}/update">Modifica</a>
+  <a class="nav-link badge-danger" href="/tests/item/{{object.id}}/update">Elimina</a>-->
+    <button class="btn" style="padding:0; color:blue;"> <a href="/tests/item/{{object.id}}/update" class="text-secondary"><div class="mt-2 pt-1 mr-1 ml-2">
+                <span class="material-icons">create</span></div>
+              </a></button>
+  <form action="{% url 'delete_test' pk=object.id %}" method="POST" style="padding:0px">
+                {% csrf_token %}
+                <button class="btn" type="submit" style="padding:0; color:red;"><div class="mt-2 pt-1 mr-1 ml-2">
+                <span class="material-icons">delete</span></div></button>
+                <!--<input class="btn btn-default btn-danger" type="submit" value="Delete"/>-->
+              </form>
+  {%endif %}
+</nav>
+
+<div class="row">
+    <div class="col-8">
+        <h3>{{object.product}}</h3>
+    </div>
+    <div class="col-4">
+    Creazione:
+    {{object.t_date}}
+    </div>
+</div>
+
+<hr>
+
+<div style="display: flex;">
+    <div style="flex-grow: 1;">
+        <h5>Descrizione</h5>
+        <p class="text-justify">
+            {{object.descr}}
+        </p>
+    </div>
+    <div style="flex-grow: 1;">
+        <div style="display: flex;">
+            <div>
+                <h5>Rapporto:</h5>
+            </div>
+            <div>
+                {{object.rapporto}}
+            </div>
+        </div>
+        <div style="display: flex;">
+            <div>
+                <h5 style="display: flex;">Scadenza Rapporto: </h5>
+            </div>
+            <div>
+                <p>{{object.scadenza_rapporto}}</p>
+            </div>
+        </div>
+
+    </div>
+        
+    
+</div>
+
+<hr>
+
+<div class="row">
+         <div class="col-6" style="display:block ">
+            <ul class="list-group">
+                <li class="list-group-item">
+                    <h6 style="display: inline">AP APEO</h6>
+                    {% if object.ap_apeo%}<span class="material-icons float-right" >check_box</span>
+                    {% else %}<span class="material-icons float-right">check_box_outline_blank</span>
+                    {% endif %}
+                </li>
+                <li class="list-group-item">
+                    <h6 style="display: inline">Clorobenzeni Clorotoluenti</h6>
+                    {% if object.clorobenzeni_clorutolenti%}<span class="material-icons float-right" >check_box</span>
+                    {% else %}<span class="material-icons float-right">check_box_outline_blank</span>
+                    {% endif %}
+                </li>
+                 <li class="list-group-item">
+                    <h6 style="display: inline">Clorofenoli</h6>
+                    {% if object.clorofenoli%}<span class="material-icons float-right" >check_box</span>
+                    {% else %}<span class="material-icons float-right">check_box_outline_blank</span>
+                    {% endif %}
+                 </li>
+                 <li class="list-group-item">
+                    <h6 style="display: inline">Ammine Aromatiche</h6>
+                    {% if object.ammine_aromatiche%}<span class="material-icons float-right" >check_box</span>
+                    {% else %}<span class="material-icons float-right">check_box_outline_blank</span>
+                    {% endif %}
+                 </li>
+                 <li class="list-group-item">
+                    <h6 style="display: inline">Coloranti Cancerogeni</h6>
+                    {% if object.coloranti_cancerogeni%}<span class="material-icons float-right" >check_box</span>
+                    {% else %}<span class="material-icons float-right">check_box_outline_blank</span>
+                    {% endif %}
+                 </li>
+                 <li class="list-group-item">
+                    <h6 style="display: inline">Coloranti Dispersi</h6>
+                    {% if object.coloranti_dispersi%}<span class="material-icons float-right" >check_box</span>
+                    {% else %}<span class="material-icons float-right">check_box_outline_blank</span>
+                    {% endif %}
+                 </li>
+                 <li class="list-group-item">
+                    <h6 style="display: inline">Navy Bue</h6>
+                    {% if object.navy_blue%}<span class="material-icons float-right" >check_box</span>
+                    {% else %}<span class="material-icons float-right">check_box_outline_blank</span>
+                    {% endif %}
+                 </li>
+                 <li class="list-group-item">
+                    <h6 style="display: inline">Metalli Pesanti</h6>
+                    {% if object.metalli_pesanti %}<span class="material-icons float-right" >check_box</span>
+                    {% else %}<span class="material-icons float-right">check_box_outline_blank</span>
+                    {% endif %}
+                </li>
+            </ul>
+        </div>
+
+
+        <div class="col" style="margin-left:auto; width:100%;">
+            <ul>
+                <li class="list-group-item">
+                    <h6 style="display: inline">Ritardanti di Fiamma</h6>
+                    {% if object.ritardanti_fiamma%}<span class="material-icons float-right" >check_box</span>
+                    {% else %}<span class="material-icons float-right">check_box_outline_blank</span>
+                    {% endif %}
+                </li>
+                <li class="list-group-item">
+                    <h6 style="display: inline">Glicoli</h6>
+                    {% if object.glicoli%}<span class="material-icons float-right" >check_box</span>
+                    {% else %}<span class="material-icons float-right">check_box_outline_blank</span>
+                    {% endif %}
+                </li>
+                 <li class="list-group-item">
+                    <h6 style="display: inline">Solventi</h6>
+                    {% if object.solventi%}<span class="material-icons float-right" >check_box</span>
+                    {% else %}<span class="material-icons float-right">check_box_outline_blank</span>
+                    {% endif %}
+                </li>
+                <li class="list-group-item">
+                    <h6 style="display: inline">Organostannici</h6>
+                    {% if object.organostannici%}<span class="material-icons float-right" >check_box</span>
+                    {% else %}<span class="material-icons float-right">check_box_outline_blank</span>
+                    {% endif %}
+                </li>
+                <li class="list-group-item">
+                    <h6 style="display: inline">Idrocarburi Policiclici Aromatici</h6>
+                    {% if object.idricarburi_policiclici_aromatici %}<span class="material-icons float-right" >check_box</span>
+                    {% else %}<span class="material-icons float-right">check_box_outline_blank</span>
+                    {% endif %}
+                </li>
+                <li class="list-group-item">
+                    <h6 style="display: inline">Voc</h6>
+                    {% if object.voc%}<span class="material-icons float-right" >check_box</span>
+                    {% else %}<span class="material-icons float-right">check_box_outline_blank</span>
+                    {% endif %}
+                </li>
+                <li class="list-group-item">
+                    <h6 style="display: inline">Ftalati</h6>
+                    {% if object.ftalati %}<span class="material-icons float-right" >check_box</span>
+                    {% else %}<span class="material-icons float-right">check_box_outline_blank</span>
+                    {% endif %}
+                </li>
+                <li class="list-group-item">
+                    <h6 style="display: inline">PFC</h6>
+                    {% if object.pfc %}<span class="material-icons float-right" >check_box</span>
+                    {% else %}<span class="material-icons float-right">check_box_outline_blank</span>
+                    {% endif %}
+                </li>
+            </ul>
+        </div>
+    </div>
+
+
+{% endblock %}

@@ -1,0 +1,391 @@
+{% extends "product/index.html" %} 
+
+{% comment %} Per cambiare il contenuto guarxda dopo la fine del commento!!!!!!!!
++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+<div class="container" style="margin-top: 20px">
+    <div style="display: flex">
+        {{object.classe}}
+        <div style="display: inline-block; width: 60%">
+            <h3>{{object.nome}}</h3>
+
+           <div style="display: inline-block; margin-right: 3em">
+                <p><span style="font-weight:bold">Codice: </span>{{object.cod}}</p>
+                <p><span style="font-weight:bold">Concentrazione: </span>{{object.concentrazione}}%</p>
+           </div>
+            <div  style="display: inline-block;">
+               <p><span style="font-weight:bold">Produttore: </span>{{object.produttore.name}}</p>
+               <p><span style="font-weight:bold">Fornitore: </span>{{object.fornitore.name}}</p>
+               <p><span style="font-weight:bold">Classe Chimica: </span>{{object.classe}}</p>
+            </div>
+        </div>
+
+
+        <div  style="display: inline-block;">
+            {% for p in object.pittogrammi_hazard.all %}
+                <img style="height: 90px;
+                    width: 90px;
+                    margin-right: 16px;"
+                    src="{{ p.image.url }}"
+                    align="right">
+            {%endfor%}
+        </div>
+    </div>
+
+    <div class="divider" style="margin: 5px"></div>
+    <div style="display: flex;">
+        <div style="display: inline-block; width: 60%">
+            <p style="font-weight:bold; ">Modalità di Stoccaggio:</p>
+            <p>{{object.mod_stoccaggio}}</p>
+        </div>
+        <div style="display: inline-block;">
+        {% for p in object.pittogrammi_dpi.all %}
+  {{ p.image.url }}
+            <img style="height: 90px;
+                width: 90px;
+                margin: 0 auto;
+                margin-bottom:0.5%"
+                src="{{ p.image.url }}">
+                {{ p.image.url }}
+        {%endfor%}
+        </div>
+    </div>
+
+    <div class="divider"></div>
+    <!--<div class="section">
+        <h5>Fornitore</h5>
+        <p>{{object.fornitore.name}}</p>
+    </div>
+
+    <p></p>
+
+
+    <p>Produttore: {{object.produttore.name}}</p>
+    <p></p>
+    <p>Concentrazione: {{object.concentrazione}}</p>
+    <p>Sostanze: {{object.sostanze}}</p><p></p>
+    {{object.note_zdhc}}
+    {{object.certificazioni}}
+    {{object.conf_zdhc}}
+    {{object.tds}}
+    {{object.sds}}
+    <p>{{object.mod_stoccaggio}}</p>
+    {{object.classe}}-->
+
+
+
+
+</div>
+
+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+
+{% endcomment %}
+
+{% block content%}
+
+<!--Nuovo studio con Bootstrap-->
+
+<div class="row">
+   <div class="col-5 justify-content-center">
+    <h2 class="justify-content-center">{{object.nome}}</h2>
+    <span style="font-weight:bold">Classe Chimicax: </span><span>{{object.classe}}</span>
+  </div>
+  <div class="col-4 ">
+  {% for f in object.fasi_produzione.all%}
+              <span class="badge badge-pill badge-info">{{f.name}}</span>
+              {% endfor %}
+  </div>
+  <div class="col-3">
+    <nav class="nav justify-content-end nav-pills my-2">
+    {% if user.is_authenticated%}
+  <!-- elimina e modifica vanno limitati agli utenti amministratori! -->
+  <!--<a class="nav-link badge-warning mx-1" href="/item/{{object.id}}/update">Modifica</a>
+  <a class="nav-link badge-danger" href="/item/{{object.id}}/update">Elimina</a>-->
+  <button class="btn" style="padding:0; color:blue;"> <a href="/item/{{object.id}}/update" class="text-secondary"><div class="mt-2 pt-1 mr-1 ml-2">
+                <span class="material-icons">create</span></div>
+              </a></button>
+  <form action="{% url 'delete_test' pk=object.id %}" method="POST" style="padding:0px">
+                {% csrf_token %}
+                <button class="btn" type="submit" style="padding:0; color:red;"><div class="mt-2 pt-1 mr-1 ml-2">
+                <span class="material-icons">delete</span></div></button>
+                <!--<input class="btn btn-default btn-danger" type="submit" value="Delete"/>-->
+              </form>
+  {%endif %}
+</nav>
+  </div>
+</div>
+
+
+<hr class="my-2"/>
+
+<div class=" mt-3">
+
+  <div class="row mb-3">
+
+    <div class="col-8 ">
+
+
+      <div class="row my-2 bg-light">
+        <div class="col px-0" >
+          <p class="align-middle" style="padding-left: 1em; padding-top: 1em;"><span style="font-weight:bold">Codice: </span>{{object.cod}}</p>
+        </div>
+        <div class="col px-0">
+          <!--<p><span style="font-weight:bold">Concentrazione: </span>{{object.concentrazione}}%</p>-->
+        </div>
+      </div>
+
+      <div class="row mt-2 mb-0 bg-light">
+        <div class="col px-0 mt-2">
+          <p style="padding-left: 1em;"><span style="font-weight:bold">Produttore: </span>{{object.produttore.name}}</p>
+        </div>
+        <div class="col px-0 mt-2">
+          <p><span style="font-weight:bold">Fornitore: </span>{{object.fornitore.name}}</p>
+        </div>
+      </div>
+
+      <div class="row mt-2 bg-light ">
+        <div class="m-1" style="padding-left: 1em;">
+            <p style="font-weight:bold; ">Modalità di Stoccaggio:</p>
+            <p>{{object.mod_stoccaggio}}</p>
+        </div>
+      </div>
+
+
+    <div class="row my-2 bg-light">
+        <div class="col px-0" style="display: flex;">
+          <!--<p><span style="font-weight:bold">Sostanze: </span>
+          {% for s in object.sostanze.all%}
+          {{s.name}}
+          {{s.concentrazione}}
+          {% endfor%}
+          </p>-->
+          <div style="display: flex;"><span style="font-weight:bold; padding-left: 1em;">Sostanze Contenute: </span></div><div id="sostanze" style="display: flex;">{{object.concentrazioni}}</div>
+        </div>
+      </div>
+
+    
+    </div>
+
+    <div class="col rounded-2" style="background: rgba(255, 239, 5, 0.3); border:#ffef07 solid 0.5em;border-radius: 1.2em; margin-left: 2%;">
+      <div class="m-2 d-flex justify-content-center">
+        {% for p in object.pittogrammi_hazard.all %}
+          <img style="height: 90px;
+              width: 90px;"
+              src="{{ p.image.url }}"
+              class="m-2 ">
+          {%endfor%}
+        </div>
+        <div class="m-2 d-flex justify-content-center">
+          {% for p in object.pittogrammi_dpi.all %}
+            <img style="height: 90px;
+                width: 90px;"
+                src="{{ p.image.url }}"
+                class="m-2">
+        {%endfor%}
+        </div>
+    </div>
+
+  </div>
+<div class="row">
+  <div class="col-8">
+    <nav>
+      <div class="nav nav-tabs mb-3" id="nav-tab" role="tablist">
+        <a class="nav-item nav-link active" id="nav-1-tab" data-toggle="tab" href="#nav-1" role="tab" aria-controls="nav-1" aria-selected="true">Frasi H</a>
+        <a class="nav-item nav-link" id="nav-2-tab" data-toggle="tab" href="#nav-2" role="tab" aria-controls="nav-2" aria-selected="false">Frasi P</a>
+        <a class="nav-item nav-link" id="nav-3-tab" data-toggle="tab" href="#nav-3" role="tab" aria-controls="nav-3" aria-selected="false">Certificazioni e ZDHC</a>
+        <a class="nav-item nav-link" id="nav-4-tab" data-toggle="tab" href="#nav-4" role="tab" aria-controls="nav-4" aria-selected="false">Test</a>
+      </div>
+    </nav>
+  </div>
+
+  <div class="col">
+    <nav class="nav nav-pills justify-content-end">
+      {% if object.tds%}
+        <a class="nav-link badge-info mx-1" href="{{object.tds.url}}">TDS</a>
+       
+      {%endif %}
+      {% if object.sds%}
+        <a class="nav-link badge-info mr-5" href="{{object.sds.url}}">SDS v{%if object.sds != None%}{{object.sds_rev}}{%else%}0{%endif%}</a>
+       
+      {%endif %}
+     </nav>
+  </div>
+</div>
+
+
+<div class="tab-content" id="nav-tabContent">
+  <div class="tab-pane fade show active" id="nav-1" role="tabpanel" aria-labelledby="nav-home-tab">
+
+      <table id="frasi_h_tab"class="table table-bordered riordina">
+        <thead class="table-active">
+          <th>Codice</th>
+          <th>Descrizione</th>
+        </thead>
+        <tbody>
+          {% for h in object.frasi_h.all%}
+            <tr>
+              <td>{{h.code}}</td>
+              <td colspan="3">{{h.description}}</td>
+            </tr>
+          {%endfor%}
+        </tbody>
+      </table>
+
+  </div>
+  <div class="tab-pane fade" id="nav-2" role="tabpanel" aria-labelledby="nav-profile-tab">
+
+    <table id="frasi_p_tab" class="table table-bordered riordina">
+        <thead class="table-active">
+          <th>Codice</th>
+          <th>Descrizione</th>
+        </thead>
+        <tbody>
+          {% for p in object.frasi_p.all%}
+            <tr>
+              <td>{{p.code}}</td>
+              <td colspan="3">{{p.description}}</td>
+            </tr>
+          {%endfor%}
+        </tbody>
+      </table>
+
+  </div>
+  <div class="tab-pane fade" id="nav-3" role="tabpanel" aria-labelledby="nav-contact-tab">
+
+
+          <div class="row mt-3">
+              <div class="col">
+              <div class="card">
+              <!-- <div class="card-header">
+                  ZDHC
+                </div>-->
+                <div class="card-body">
+                  <h5 class="card-title">Dichiarazione Conformità MRSL ZDHC</h5>
+                  <p class="card-text">{{object.conf_zdhc}}</p>
+                  <h5 class="card-title">Gateway ZDHC</h5>
+                  {%for g in object.gateway.all%}
+                  <p class="card-text">{{g.name}}</p>
+                  {%endfor%}
+                  <a href="https://www.my-aip.com/ZDHCGateway/SearchResults.aspx?IsHideFilter=False" class="btn btn-primary">Link Gateway ZDHC</a>
+                </div>
+              </div>
+              </div>
+              <div class="col">
+              <div class="card">
+              <!-- <div class="card-header">
+                  ZDHC
+                </div>-->
+                <div class="card-body">
+                  <h5 class="card-title">Certificazioni</h5>
+                  {%for c in object.certificazioni.all%}
+                  <p class="card-text">{{c.name}}</p>
+                  {%endfor%}
+                </div>
+              </div>
+            </div>
+          </div>
+
+
+  </div>
+  <div class="tab-pane fade" id="nav-4" role="tabpanel" aria-labelledby="nav-profile-tab">
+
+    <table class="table table-hover table-bordered table-striped " >
+        <thead>
+
+          <tr >
+            <th ><span style="writing-mode: vertical-lr;"> <div  style="-ms-transform: rotate(-90deg); transform: rotate(-180deg);"><span> Creazione </span> <br> <span style="text-align: right;">Data</span> </div></span></th>
+            <!--<th>Descrizione</th>-->
+            <th><span style="writing-mode: vertical-lr;"> <div  style="-ms-transform: rotate(-90deg); transform: rotate(-180deg);">APEO <br> AP</div></span></th>
+            <th><span style="writing-mode: vertical-lr;"> <div  style="-ms-transform: rotate(-90deg); transform: rotate(-180deg);">Clorutolenti <br> Clorobenzeni</div></span> </th>
+            <th><span style="writing-mode: vertical-lr;"> <div  style="-ms-transform: rotate(-90deg); transform: rotate(-180deg);">Clorofenoli</div></span></th>
+            <th><span style="writing-mode: vertical-lr;"> <div  style="-ms-transform: rotate(-90deg); transform: rotate(-180deg);">Aromatiche <br> Ammine </div></span></th>
+            <th><span style="writing-mode: vertical-lr;"> <div  style="-ms-transform: rotate(-90deg); transform: rotate(-180deg);">Dispersi<br> Coloranti </div></span></th>
+            <th><span style="writing-mode: vertical-lr;"> <div  style="-ms-transform: rotate(-90deg); transform: rotate(-180deg);">Cancerogeni<br>Coloranti  </div></span></th>
+            <th><span style="writing-mode: vertical-lr;"> <div  style="-ms-transform: rotate(-90deg); transform: rotate(-180deg);">Blue <br>Navy </div></span></th>
+            <th><span style="writing-mode: vertical-lr;"> <div  style="-ms-transform: rotate(-90deg); transform: rotate(-180deg);"> Fiamma<br> Ritardanti</div></span></th>
+            <th><span style="writing-mode: vertical-lr;"> <div  style="-ms-transform: rotate(-90deg); transform: rotate(-180deg);">Glicoli</div></span></th>
+            <th><span style="writing-mode: vertical-lr;"> <div  style="-ms-transform: rotate(-90deg); transform: rotate(-180deg);">Solventi</div></span></th>
+            <th><span style="writing-mode: vertical-lr;"> <div  style="-ms-transform: rotate(-90deg); transform: rotate(-180deg);">Organostannici</div></span></th>
+            <th><span style="writing-mode: vertical-lr;"> <div  style="-ms-transform: rotate(-90deg); transform: rotate(-180deg);">Aromatici  <br> Policiclici <br> Idrocarburi</div></span></th>
+            <th><span style="writing-mode: vertical-lr;"> <div  style="-ms-transform: rotate(-90deg); transform: rotate(-180deg);">Voc</div></span></th>
+            <th><span style="writing-mode: vertical-lr;"> <div  style="-ms-transform: rotate(-90deg); transform: rotate(-180deg);">Ftalati</div></span></th>
+            <th><span style="writing-mode: vertical-lr;"> <div  style="-ms-transform: rotate(-90deg); transform: rotate(-180deg);">Pfc</div></span></th>
+            <th><span style="writing-mode: vertical-lr;"> <div  style="-ms-transform: rotate(-90deg); transform: rotate(-180deg);"> Pesanti<br>Metalli </div></span></th>
+          </tr>
+        </thead>
+
+        <tbody>
+        {% comment %} {% for p in object_list %} {% endcomment %}
+        {% for n in object.test_set.all %}
+          <tr class='clickable-row' data-href="/tests/item/{{n.id}}">
+            <td>{{n.t_date}}</td> 
+            
+            <td class="set_bool" style="align-content: center;">{{n.ap_apeo }}</td>
+            <td class="set_bool">{{n.clorobenzeni_clorutolenti}}</td>
+            <td class="set_bool">{{n.clorofenoli}}</td>
+            <td class="set_bool">{{n.ammine_aromatiche}}</td>
+            <td class="set_bool">{{n.coloranti_dispersi}}</td> 
+           <td class="set_bool">{{n.coloranti_cancerogeni}}</td>
+           <td class="set_bool">{{n.navy_blue}}</td>
+           <td class="set_bool">{{n.ritardanti_fiamma}}</td>
+           <td class="set_bool">{{n.glicoli}}</td>
+           <td class="set_bool">{{n.solventi}}</td>
+           <td class="set_bool">{{n.organostannici}}</td>
+           <td class="set_bool">{{n.idricarburi_policiclici_aromatici}}</td>
+           <td class="set_bool">{{n.voc}}</td>
+           <td class="set_bool">{{n.ftalati }}</td>
+           <td class="set_bool">{{n.pfc}}</td>
+           <td class="set_bool">{{n.metalli_pesanti}}</td>
+          </tr>
+          {% endfor %}
+          
+        </tbody>
+      </table>
+      
+      
+    </div>
+  </div>
+  
+  
+  
+  
+</div>
+
+{%block script%}
+<script src="/static/admin/js/admin/DateTimeShortcuts.js"></script>
+
+<script>
+  el=document.getElementsByClassName("set_bool")
+  for (var i=0; i<el.length; i++){ 
+    if(el[i].innerText == 'True'){
+      el[i].innerHTML = '<span class="material-icons float-right" >check_box</span>'; 
+    }
+    else{
+      el[i].innerHTML = '<span class="material-icons float-right">check_box_outline_blank</span>';
+    }
+    }
+</script>
+<script>
+  el=document.getElementById("sostanze");
+  data=JSON.parse(el.innerHTML.replaceAll('\'', '"'));
+  el.innerHTML="";
+  var s=el.appendChild(document.createElement("table"));
+  
+  var row=s.insertRow(0);
+  row.innerHTML="<th>Sostanza</th><th>N°CAS</th><th>Concentrazione</th>"
+  for(var e=0; e<data.sostanze.length; e=e+1){
+    row=s.insertRow(s.rows.length);
+    row.insertCell(0).innerHTML=data.sostanze[e].nome;
+    row.insertCell(1).innerHTML=data.sostanze[e].cas;
+    row.insertCell(2).innerHTML=data.sostanze[e].q+"%";
+  }
+
+  c1=s.children[0];
+  for(var c=0; c<c1.children.length; c=c+1){
+    for(var f=0; f<c1.children[c].children.length; f=f+1){
+      c1.children[c].children[f].style="padding-left: 2em";
+    }
+  }
+</script>
+{%endblock script%}
+  
+{%endblock content%}

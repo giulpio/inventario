@@ -1,0 +1,32 @@
+{% extends "product/index.html" %}
+
+
+
+{% block content%}
+<div>
+    <a href="create"><button class="btn btn-primary">Crea</button></a>
+    <table class="table">
+        <tbody>
+            {% for n in object_list%}
+                <tr><td>{{n.name}} 
+                   
+                </td>
+                    <td class="p-0">
+                        <button class="btn" style="padding:0; color:blue;"> <a href="item/{{n.id}}/update" class="text-secondary"><div class="mt-2 pt-1 mr-1 ml-2">
+                          <span class="material-icons">create</span></div>
+                        </a></button>
+                      </td>
+                      <td class="p-0">
+                        <div><form action="{% url 'fasi-delete' pk=n.id %}" method="POST">
+                            {% csrf_token %}
+                            <button class="btn" type="submit" style="padding:0; color:red;"><div class="mt-2 pt-1 mr-1 ml-2">
+                            <span class="material-icons">delete_forever</span></div></button>
+                        </form></div>
+                      </td>
+                </tr>
+            {%endfor%}
+        </tbody>
+    </table>
+</div>
+
+{% endblock content %}

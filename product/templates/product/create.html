@@ -1,0 +1,420 @@
+{% extends "product/index.html" %} {% block content%}
+
+
+<div class="content">
+  <div class="colM" id="content">
+    <div id="content-main">
+      <form enctype="multipart/form-data" id="form" method="post">
+        {% csrf_token %}
+        <div>
+          <fieldset class="aligned" >
+            <div class="form-riga">
+            <div class="field-nome form-input" >
+              <div>
+              <label for="{{form.nome.id}}">{{form.nome.label}}</label>
+                
+                  {{form.nome}}
+                
+                </div>
+            </div>
+            <div class="field-cod form-input">
+              <div>
+              <label for="{{form.cod.id}}" required>{{form.cod.label}}</label>              
+                {{form.cod}}
+                
+              </div>
+            </div>
+
+            <div class="field-stato_arte form-input">
+              <div>
+              <label for="{{form.stato_arte.id}}" required>Stato</label>              
+                {{form.stato_arte}} 
+              </div>
+            </div>
+
+          </div>
+
+
+          <div class="form-riga">
+
+
+            <div class="field-classe form-input">
+              <div>
+              <label for="{{form.classe.id}}" required>Classe</label>              
+                {{form.classe}} 
+              </div>
+            </div>
+
+            <div class="field-fornitore form-input" >
+              <label for="id_fornitore">{{form.fornitore.label}}</label>
+                <div class="related-widget-wrapper">
+                  {{form.fornitore}}
+                  <a class="related-widget-wrapper-link add-related" id="add_id_fornitore" href="/admin/product/seller/add/?_to_field=name&amp;_popup=1" title="Add another seller"><img src="/static/admin/img/icon-addlink.svg" alt="Add"></a>
+                </div>
+            </div>
+
+            <div class="field-produttore form-input">
+              <label for="id_fornitore" required>{{form.produttore.label}}</label>              
+              <div class="related-widget-wrapper">
+                {{form.produttore}}
+                <a class="related-widget-wrapper-link add-related" id="add_id_produttore" href="/admin/product/manifacturer/add/?_to_field=name&amp;_popup=1" title="Add another manifacturer"><img src="/static/admin/img/icon-addlink.svg" alt="Add"></a>
+              </div>
+            </div>
+
+          </div>
+
+          <div class="form-riga">
+            <div class="field-mod_stoccaggio">
+              <label for="{{form.mod_stoccaggio.id}}">Modalità di Stoccaggio</label>
+              {{form.mod_stoccaggio}}
+            </div>
+
+            <div class="field-tds">
+              <label for="{{form.tds.id}}">Tds</label>
+              <p class="file-upload">{{form.tds}}</p>
+          </div>
+          </div>
+
+          <div class="form-riga ">
+            <div class="field-sds" style="display: flex;">
+                <label for="{{form.sds.id}}" >Scheda di Sicurezza</label>
+                <p class="file-upload" style="margin-left: 0;"></span>{{form.sds}}</p>
+            </div>
+            <div>
+              <div style="display: flex;">
+                <div><label for="{{form.sds_rev.id}}" >Revisione</label></div>
+                          
+                             <div>{{form.sds_rev}}</div>
+              </div>
+              <div style="display: flex;">
+                <div><label for="{{form.sds_date.id}}" >Scadenza</label></div>
+                          
+                             <div>{{form.sds_date}}</div>
+              </div>
+            </div>
+            
+          </div>
+
+      <div class="form-riga field-frasi_h">    
+        <div class="form-input">          
+          <label for="{{form.frasi_h.id}}">Frasi h:</label>
+    
+          <div class="related-widget-wrapper">
+            {{form.frasi_h}}
+            <a class="related-widget-wrapper-link add-related" id="add_id_frasi_h" href="/admin/product/hazard_statement/add/?_to_field=id&amp;_popup=1" title="Add another hazard_ statement"><img src="/static/admin/img/icon-addlink.svg" alt="Add"></a>
+          </div>
+        </div>
+        <div class="form-input">          
+          <label for="{{form.frasi_p.id}}">Frasi p:</label>
+    
+          <div class="related-widget-wrapper">
+            {{form.frasi_p}}
+            <a class="related-widget-wrapper-link add-related" id="add_id_frasi_p" href="/admin/product/precautionary_statement/add/?_to_field=id&amp;_popup=1" title="Add another hazard_ statement"><img src="/static/admin/img/icon-addlink.svg" alt="Add"></a>
+          </div>
+        </div>
+
+        <div class="form-input">
+                    
+                    
+          <label for="{{form.fasi_produzione.id}}">Fasi produzione:</label>
+          
+              <div class="related-widget-wrapper">
+{{form.fasi_produzione}}
+
+<a class="related-widget-wrapper-link add-related" id="add_id_fasi_produzione" href="/admin/product/fasi_produzione/add/?_to_field=id&amp;_popup=1" title="Add another fasi_produzione"><img src="/static/admin/img/icon-addlink.svg" alt="Add"></a>
+
+</div>
+          
+      
+      
+          <div class="help">Hold down “Control”, or “Command” on a Mac, to select more than one.</div>
+      
+  </div>
+      </div>
+          
+
+      <div class="form-riga field-pittogrammi_hazard">
+            
+            
+        <div class="form-input">
+            
+            
+                <label for="{{form.pittogrammi_hazard.id}}">Pittogrammi hazard:</label>
+                
+                    <div class="related-widget-wrapper">
+                      {{form.pittogrammi_hazard}}
+
+<a class="related-widget-wrapper-link add-related" id="add_id_pittogrammi_hazard" href="/admin/product/pictogram_h/add/?_to_field=id&amp;_popup=1" title="Add another pictogram_h"><img src="/static/admin/img/icon-addlink.svg" alt="Add"></a>
+
+</div>
+        </div>
+    
+        <div class="form-input">
+                    
+                    
+          <label for="{{form.pittogrammi_dpi.id}}">Pittogrammi dpi:</label>
+          
+              <div class="related-widget-wrapper">
+{{form.pittogrammi_dpi}}
+
+<a class="related-widget-wrapper-link add-related" id="add_id_pittogrammi_dpi" href="/admin/product/pictogram_dpi/add/?_to_field=id&amp;_popup=1" title="Add another pictogram_dpi"><img src="/static/admin/img/icon-addlink.svg" alt="Add"></a>
+
+</div>
+          
+      
+      
+         
+      
+  </div>
+        
+  <div class="form-input">
+                    
+                    
+    <label for="{{form.certificazioni.id}}">Certificazioni:</label>
+    
+        <div class="related-widget-wrapper">
+{{form.certificazioni}}
+
+<a class="related-widget-wrapper-link add-related" id="add_id_certificazioni" href="/admin/product/certificazioni/add/?_to_field=id&amp;_popup=1" title="Add another certificazioni"><img src="/static/admin/img/icon-addlink.svg" alt="Add"></a>
+
+</div>
+    
+
+
+    <div class="help">Hold down “Control”, or “Command” on a Mac, to select more than one.</div>
+
+</div>
+
+</div>
+
+<div class="form-row field-gateway">
+            
+            
+  <div class="form-input">
+      
+      
+          <label for="{{form.gateway.id}}">Gateway:</label>
+          
+              <div class="related-widget-wrapper">
+                {{form.gateway}}
+<a class="related-widget-wrapper-link add-related" id="add_id_gateway" href="/admin/product/gateway_zdhc/add/?_to_field=id&amp;_popup=1" title="Add another gateway_zdhc"><img src="/static/admin/img/icon-addlink.svg" alt="Add"></a>
+
+</div>
+  </div>
+
+
+  <div class="checkbox-row form-input">
+                    
+                    
+    <label class="vCheckboxLabel" for="id_conf_zdhc">Dichiarazione conformità zdhc</label>
+    {{form.conf_zdhc}}
+
+</div>
+
+</div>
+
+
+
+          </fieldset>
+        </div>
+        
+        <div style="display: none;">{{form.concentrazioni}}</div>
+            <div class="form-row field-sds_date">
+              <div>       
+                
+              </div>
+            </div>
+
+            
+          </fieldset>
+        </div>
+      </form>
+
+
+
+
+
+      <div style="flex-grow: 2;">
+        <div class="form-group" style="margin: 0 ">
+          <div style="margin: 20px;">
+          <table class="table table-bordered" id="tab">
+          <tr><th>Sostanza</th><th>N° CAS</th><th>Concentrazione %</th><th><button class="btn btn-success add-row">+</button></th></tr>
+        
+        
+        </table>
+        
+        </div>
+        
+        </div>
+      </div>
+
+    </div>
+  
+
+<!--<div class="form-group" style="margin: 0 ">
+  <div style="margin: 20px;">
+  <table class="table table-bordered" id="tab">
+  <tr><th>Sostanza</th><th>N° CAS</th><th>Concentrazione %</th><th></th></tr>
+
+
+</table>
+<button class="btn btn-success add-row">+</button>
+</div>
+
+</div>-->
+
+<div style="margin: 20px;">
+<button
+class="btn btn btn-primary col-auto"
+onclick="save_form()"
+style="margin: 20px"
+>
+Salva
+</button>
+</div>
+</div>
+
+<script src="/admin/jsi18n/"></script>
+<script src="/static/admin/js/vendor/jquery/jquery.js"></script>
+<script src="/static/admin/js/core.js"></script>
+<script src="/static/admin/js/jquery.init.js"></script>
+<script src="/static/admin/js/admin/RelatedObjectLookups.js"></script>
+<script src="/static/admin/js/calendar.js"></script>
+<script src="/static/admin/js/admin/DateTimeShortcuts.js"></script>
+
+
+<link rel="stylesheet" type="text/css" href="/static/admin/css/responsive.css">
+
+<script
+  src="https://code.jquery.com/jquery-3.2.1.slim.min.js"
+  integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN"
+  crossorigin="anonymous"
+></script>
+<script>
+tab=document.getElementById("tab");
+jdata=document.getElementById("id_concentrazioni");
+jdata.style.display="none"
+data=JSON.parse(jdata.innerHTML);
+if(data.sostanze != undefined){
+  for(i=0; i<data.sostanze.length; i=i+1){
+    var row=tab.insertRow(tab.rows.length);
+    row.insertCell(0).innerHTML='<input type="text" class="form-control" value="'+data.sostanze[i].nome+'"></input>';
+    row.insertCell(1).innerHTML='<input type="text" class="form-control" value="'+data.sostanze[i].cas+'"></input>';
+    row.insertCell(2).innerHTML='<input type="text" class="form-control" value="'+data.sostanze[i].q+'"></input>';
+    row.insertCell(3).innerHTML='<button class="btn btn-danger delete-row">-</button>';
+  }
+}
+$(document).on("click", ".delete-row", function (e) {
+  e.preventDefault();
+    tab.deleteRow(this.parentElement.parentElement.rowIndex)
+    return false;
+  });
+
+$(document).on("click", ".add-row", function (e){
+  e.preventDefault();
+  var row=tab.insertRow(tab.rows.length);
+  row.insertCell(0).innerHTML='<input type="text" class="form-control"></input>';
+  row.insertCell(1).innerHTML='<input type="text" class="form-control"></input>';
+  row.insertCell(2).innerHTML='<input type="text" class="form-control"></input>';
+  row.insertCell(3).innerHTML='<button class="btn btn-danger delete-row">-</button>';
+});
+
+function save_form(){
+  var new_data={"sostanze":[]}
+  if(tab.rows.length>0){
+  for(var r=1; r<tab.rows.length; r=r+1){
+    var val1=tab.rows[r].cells[0].firstElementChild.value;
+    var val2=tab.rows[r].cells[1].firstElementChild.value;
+    var val3=tab.rows[r].cells[2].firstElementChild.value;
+    if (val1 != "" || val2 != "" || val3 != ""){
+      new_data.sostanze[new_data.sostanze.length]={"nome": val1, "q":val3, "cas":val2}
+    } else{console.log("sostanza non esistente")}
+  }}
+  jdata.innerHTML=JSON.stringify(new_data)
+  //jdata.style.display="block"
+  document.getElementById("form").submit()
+}
+
+</script>
+
+<script>
+  el=document.getElementsByClassName("field-sds");
+  p=el[0].childNodes[3];
+  newEl=document.createElement("span");
+  newEl.classList.add("clearable-file-input");
+  newEl.appendChild(p.children[1]);
+  newEl.appendChild(p.children[1]);
+  p.firstElementChild.after(newEl)
+</script>
+<!--
+<script type="text/javascript">
+  function updateElementIndex(el, prefix, ndx) {
+    var id_regex = new RegExp("(" + prefix + "-\\d+)");
+    var replacement = prefix + "-" + ndx;
+    if ($(el).attr("for"))
+      $(el).attr("for", $(el).attr("for").replace(id_regex, replacement));
+    if (el.id) el.id = el.id.replace(id_regex, replacement);
+    if (el.name) el.name = el.name.replace(id_regex, replacement);
+  }
+  function cloneMore(selector, prefix) {
+    var newElement = $(selector).clone(true);
+    var total = $("#id_" + prefix + "-TOTAL_FORMS").val();
+    newElement
+      .find(":input:not([type=button]):not([type=submit]):not([type=reset])")
+      .each(function () {
+        var name = $(this).attr("name");
+        if (name) {
+          name = name.replace("-" + (total - 1) + "-", "-" + total + "-");
+          var id = "id_" + name;
+          $(this).attr({ name: name, id: id }).val("").removeAttr("checked");
+        }
+      });
+    newElement.find("label").each(function () {
+      var forValue = $(this).attr("for");
+      if (forValue) {
+        forValue = forValue.replace("-" + (total - 1) + "-", "-" + total + "-");
+        $(this).attr({ for: forValue });
+      }
+    });
+    total++;
+    $("#id_" + prefix + "-TOTAL_FORMS").val(total);
+    $(selector).after(newElement);
+    var conditionRow = $(".form-row:not(:last)");
+    conditionRow
+      .find(".btn.add-form-row")
+      .removeClass("btn-success")
+      .addClass("btn-danger")
+      .removeClass("add-form-row")
+      .addClass("remove-form-row")
+      .html("-");
+    return false;
+  }
+  function deleteForm(prefix, btn) {
+    var total = parseInt($("#id_" + prefix + "-TOTAL_FORMS").val());
+    if (total > 1) {
+      btn.closest(".form-row").remove();
+      var forms = $(".form-row");
+      $("#id_" + prefix + "-TOTAL_FORMS").val(forms.length);
+      for (var i = 0, formCount = forms.length; i < formCount; i++) {
+        $(forms.get(i))
+          .find(":input")
+          .each(function () {
+            updateElementIndex(this, prefix, i);
+          });
+      }
+    }
+    return false;
+  }
+  $(document).on("click", ".add-form-row", function (e) {
+    e.preventDefault();
+    cloneMore(".form-row:last", "form");
+    return false;
+  });
+  $(document).on("click", ".remove-form-row", function (e) {
+    e.preventDefault();
+    deleteForm("form", $(this));
+    return false;
+  });
+</script>
+-->
+{% endblock content %}

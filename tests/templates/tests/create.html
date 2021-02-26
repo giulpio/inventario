@@ -1,0 +1,140 @@
+{% extends "product/index.html" %}
+
+
+
+
+
+{% block content%}
+
+<form enctype="multipart/form-data" method="POST">{% csrf_token %}
+  <div id="autocompletami" style="display: none;"></div>
+<div class="row">
+    <div class="col-6" style="display: flex;">
+      <div>
+        <h5>Prodotto: </h5>
+      </div>
+    {{form.product}}
+    </div>
+    <div class="col-6" style="display: flex;">
+      <div>
+        <h5>Data esecuzione: </h5>
+      </div>
+    {{form.t_date}}
+    </div>
+</div>
+
+<div style="display: flex; margin-top: 2em;">
+  <div style="flex-grow: 1;">
+     <h5>Descrizione</h5>
+    {{form.descr}}
+  </div>
+  <div style="flex-grow: 1;">
+    <div style="display: flex; margin-bottom: 4em;">
+      <div>
+        <h5>Rapporto: &Tab;</h5>
+      </div>
+      <div>
+        {{form.rapporto}}
+      </div>
+    </div>
+    <div style="display: flex;">
+      <div>
+        <h5>Scadenza Rapporto:</h5>
+      </div>
+      <div>
+        {{form.scadenza_rapporto}}
+      </div>
+    </div>
+  </div>
+   
+</div>
+
+<hr>
+
+<div class="row">
+         <div class="col-6" style="display:block ">
+            <ul class="list-group">
+                <li class="list-group-item">
+                  <span>  {{form.ap_apeo}}</span>
+                    <h6 style="display: inline">AP APEO</h6>
+                </li>
+                <li class="list-group-item">
+                  <span>  {{form.clorobenzeni_clorutolenti}}</span>
+                    <h6 style="display: inline">Clorobenzeni Clorotoluenti</h6>
+                </li>
+                <li class="list-group-item">
+                  <span> {{form.clorofenoli}}</span>
+                    <h6 style="display: inline">Clorofenoli</h6>
+                </li>
+                <li class="list-group-item">
+                  <span> {{form.ammine_aromatiche}}</span>
+                    <h6 style="display: inline">Ammine Aromatiche</h6>
+                </li>
+                <li class="list-group-item">
+                  <span> {{form.coloranti_cancerogeni}}</span>
+                    <h6 style="display: inline">Coloranti Cancerogeni</h6>
+                </li>
+                <li class="list-group-item">
+                  <span> {{form.coloranti_dispersi}}</span>
+                    <h6 style="display: inline">Coloranti Dispersi</h6>
+                </li>
+                <li class="list-group-item">
+                  <span> {{form.navy_blue}}</span>
+                    <h6 style="display: inline">Navy Bue</h6>
+                </li>
+                <li class="list-group-item">
+                  <span> {{form.metalli_pesanti}}</span>
+                    <h6 style="display: inline">Metalli Pesanti</h6>
+                </li>
+            </ul>
+        </div>
+        <div class="col-6" style="display:block ">
+            <ul class="list-group">
+                <li class="list-group-item">
+                  <span>  {{form.ritardanti_fiamma}}</span>
+                    <h6 style="display: inline">Ritardanti di Fiamma </h6>
+                </li>
+                <li class="list-group-item">
+                  <span>  {{form.glicoli}}</span>
+                    <h6 style="display: inline">Glicoli</h6>
+                </li>
+                <li class="list-group-item">
+                    <span>  {{form.solventi}}</span>
+                    <h6 style="display: inline">Solventi</h6>
+                </li>
+                <li class="list-group-item">
+                  <span>  {{form.organostannici}}</span>
+                    <h6 style="display: inline">Organostannici</h6>
+                </li>
+                <li class="list-group-item">
+                  <span>  {{form.idricarburi_policiclici_aromatici}}</span>
+                    <h6 style="display: inline">Idrocarburi Policiclici Aromatici</h6>
+                </li>
+                <li class="list-group-item">
+                    <span>  {{form.voc}}</span>
+                    <h6 style="display: inline">Voc</h6>
+                </li>
+                <li class="list-group-item">
+                  <span>  {{form.ftalati}}</span>
+                    <h6 style="display: inline">Ftalati</h6>
+                </li>
+                <li class="list-group-item">
+                    <span>  {{form.pfc}}</span>
+                    <h6 style="display: inline">PFC</h6>
+                </li>
+            </ul>
+        </div>
+</div>
+
+<br>
+
+
+<button class="btn btn btn-primary" type="submit"> Salva </button>
+
+</form>
+{% endblock content%}
+
+{%block script %}
+<script>
+</script>
+{%endblock script%}

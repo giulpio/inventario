@@ -1,0 +1,29 @@
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+.riga1 {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+  /*justify-items: center;*/
+  align-items: center;
+  align-content: center;
+}
+.a {
+  grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+}
+
+.form-group {
+  margin: 20px;
+}
+
+.img-card {
+  padding: 10px;
+}
+
+.nav1 {
+  display: grid;
+  grid-template-columns: 70% 15% 15%;
+}

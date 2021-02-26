@@ -1,0 +1,23 @@
+{% extends "product/index.html" %}
+
+
+
+
+
+{% block content%}
+<div class="form-group">
+<form enctype="multipart/form-data" method="POST">{% csrf_token %}
+    
+        {{form.name}}
+
+    
+        <label for="{{form.image.id_for_label}}">{{form.image.label}}</label>
+        {{form.image}}
+      
+
+      <button class="btn btn btn-primary col-auto" type="submit" style="margin: 20px;">  Salva </button>
+</form>
+
+
+</div>
+{%endblock content%}

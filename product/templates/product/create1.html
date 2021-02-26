@@ -1,0 +1,233 @@
+{% extends "product/index.html" %}
+
+{% block content%}
+
+<form enctype="multipart/form-data" method="POST">
+    {% csrf_token %}
+
+
+
+    <div class="riga1">
+        <div class="form-group">
+            <label for="id_nome">{{form.nome.label}}</label>
+            <input type="text" name="nome" class="form-control" id="{{form.nome.id}}" {% if form.nome.value != none%} value="{{form.nome.value}} " {%endif%} placeholder="nome prodotto" max_length="100" required />
+
+        </div>
+        <div class="form-group">
+            <label for="id_cod">Codice</label>
+            <input type="text" name="cod" class="form-control" id="{{form.cod.id}}" {%if form.cod.value != none %} value="{{form.cod.value}}" {%endif%} placeholder="codice prodotto" required>
+           
+        </div>
+        <div class="form-group">
+            <label for="id_classe">Classe</label>
+            <input type="text" name="classe" id="{{form.classe.id}}" class="form-control" {%if form.classe.label != none %} value="{{form.classe.value}}" {%endif%} placeholder="classe chimica" required>
+        </div>
+    </div>
+
+    <div class="riga1 a">
+        <div class="form-group">
+            <label for="id_fornitore">{{form.fornitore.label}}</label>
+            <select name="fornitore" required="" id="id_fornitore" class="form-control">
+                {% for s in form.fornitore%}
+                {{s}}
+                {%endfor%}
+              </select>   
+        </div>
+        {{form.fornitore}}
+        <div class="form-group">
+            <label for="id_produttore">{{form.produttore.label}}</label>
+            <select name="produttore" required="" id="id_produttore" class="form-control">
+                {% for s in form.produttore%}
+                {{s}}
+                {%endfor%}
+              </select>   
+            
+        </div>
+         
+            <div class="form-group">
+                <label for="id_tds">{{form.tds.label}}</label>
+                <!--<input type="file" name="tds" id="id_tds" class="form-control-file">-->
+                {{form.tds}}
+              </div>
+           
+        
+        
+            <div class="form-group">
+                <label for="id_sds">{{form.sds.label}}</label>
+                <input type="file" name="sds" id="id_sds" class="form-control-file">
+              </div>
+           
+        
+    </div>
+    <div class="riga1">
+    <div class="form-group">
+        <label for="id_mod_stoccaggio">{{form.mod_stoccaggio.label}}</label>
+        <textarea class="form-control" id="id_mod_stoccaggio" rows="3" name="mod_stoccaggio"></textarea>
+      </div>
+</div>
+
+<br>
+     
+    <div class="" style="display: block;">
+        {{ formset.management_form }}
+        {% for form in formset %}
+        <div class="row form-row spacer">
+            <div class="col-4">
+                <label>{{form.name.label}}</label>
+                <label>{{form.concentrazione.label}}</label>
+            </div>
+            <div class="col-4">
+                <div class="input-group">
+                    {{form.name}}
+                    {{form.concentrazione}}
+                </div>
+                <div class="input-group-append">
+                    <button class="btn btn-success add-form-row">+</button>
+                </div>
+
+        </div>
+        {% endfor %}
+        <!--<div class="col-8">{{form.sostanze}}</div>-->
+
+    </div>
+
+    <div class="riga1">
+
+        <div class="form-group">
+            <label for="id_frasi_h">{{form.frasi_h.label}}</label>
+            <select name="frasi_h" id="id_frasi_h" multiple="" class="form-control">
+                {%for h in form.frasi_h%}
+                    {{h}}
+                {%endfor%}
+              
+              </select>
+        </div>
+
+        
+        <div class="form-group">
+            <label for="id_frasi_p">{{form.frasi_p.label}}</label>
+            <select name="frasi_p" id="id_frasi_p" multiple="" class="form-control">
+                {%for p in form.frasi_p%}
+                    {{p}}
+                {%endfor%}   
+              </select>
+        </div>
+
+        <div class="form-group">
+            <label for="id_pittogrammi_hazard">{{form.pittogrammi_hazard.label}}</label>
+            <select name="pittogrammi_hazard" id="id_pittogrammi_hazard" multiple="" class="form-control">
+                {%for p in form.pittogrammi_hazard%}
+                    {{p}}
+                {%endfor%}   
+              </select>
+        </div>
+
+        <div class="form-group">
+            <label for="id_pittogrammi_dpi">{{form.pittogrammi_dpi.label}}</label>
+            <select name="pittogrammi_dpi" id="id_pittogrammi_dpi" multiple="" class="form-control">
+                {%for p in form.pittogrammi_dpi%}
+                    {{p}}
+                {%endfor%}   
+              </select>
+        </div>
+
+        <div class="form-group">
+            <label for="id_fasi_produzione">{{form.fasi_produzione.label}}</label>
+            <select name="fasi_produzione" id="id_fasi_produzione" multiple="" class="form-control">
+                {%for p in form.fasi_produzione%}
+                    {{p}}
+                {%endfor%}   
+              </select>
+        </div>
+        
+    </div>
+
+    
+    <div class="form-group">
+        <label for="id_note_zdhc">{{form.note_zdhc.label}}</label>
+        <textarea class="form-control" id="id_id_note_zdhc" rows="3" name="note_zdhc"></textarea>
+    </div>
+
+    <div class="form-group">
+        <label for="id_conf_zdhc">DICHIARAZIONE CONFORMITA' MRSL ZDHC</label>
+        <textarea class="form-control" id="id_id_conf_zdhc" rows="3" name="conf_zdhc"></textarea>
+    </div>
+
+    <div class="form-group">
+        <label for="id_certificazioni">{{form.certificazioni.label}}</label>
+        <textarea class="form-control" id="id_id_certificazioni" rows="3" name="note_zdhc"></textarea>
+    </div>
+
+
+
+
+
+    <button class="btn btn btn-primary col-auto" type="submit" style="margin: 20px;">Salva</button>
+</form>
+
+
+<script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
+<script type="text/javascript">
+function updateElementIndex(el, prefix, ndx) {
+    var id_regex = new RegExp('(' + prefix + '-\\d+)');
+    var replacement = prefix + '-' + ndx;
+    if ($(el).attr("for")) $(el).attr("for", $(el).attr("for").replace(id_regex, replacement));
+    if (el.id) el.id = el.id.replace(id_regex, replacement);
+    if (el.name) el.name = el.name.replace(id_regex, replacement);
+}
+function cloneMore(selector, prefix) {
+    var newElement = $(selector).clone(true);
+    var total = $('#id_' + prefix + '-TOTAL_FORMS').val();
+    newElement.find(':input:not([type=button]):not([type=submit]):not([type=reset])').each(function() {
+        var name = $(this).attr('name')
+        if(name) {
+            name = name.replace('-' + (total-1) + '-', '-' + total + '-');
+            var id = 'id_' + name;
+            $(this).attr({'name': name, 'id': id}).val('').removeAttr('checked');
+        }
+    });
+    newElement.find('label').each(function() {
+        var forValue = $(this).attr('for');
+        if (forValue) {
+          forValue = forValue.replace('-' + (total-1) + '-', '-' + total + '-');
+          $(this).attr({'for': forValue});
+        }
+    });
+    total++;
+    $('#id_' + prefix + '-TOTAL_FORMS').val(total);
+    $(selector).after(newElement);
+    var conditionRow = $('.form-row:not(:last)');
+    conditionRow.find('.btn.add-form-row')
+    .removeClass('btn-success').addClass('btn-danger')
+    .removeClass('add-form-row').addClass('remove-form-row')
+    .html('-');
+    return false;
+}
+function deleteForm(prefix, btn) {
+    var total = parseInt($('#id_' + prefix + '-TOTAL_FORMS').val());
+    if (total > 1){
+        btn.closest('.form-row').remove();
+        var forms = $('.form-row');
+        $('#id_' + prefix + '-TOTAL_FORMS').val(forms.length);
+        for (var i=0, formCount=forms.length; i<formCount; i++) {
+            $(forms.get(i)).find(':input').each(function() {
+                updateElementIndex(this, prefix, i);
+            });
+        }
+    }
+    return false;
+}
+$(document).on('click', '.add-form-row', function(e){
+    e.preventDefault();
+    cloneMore('.form-row:last', 'form');
+    return false;
+});
+$(document).on('click', '.remove-form-row', function(e){
+    e.preventDefault();
+    deleteForm('form', $(this));
+    return false;
+});
+
+</script>
+
+{% endblock content %}

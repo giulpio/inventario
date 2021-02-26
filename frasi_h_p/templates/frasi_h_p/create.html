@@ -1,0 +1,33 @@
+{% extends "product/index.html" %}
+
+
+
+
+
+{% block content%}
+
+<form enctype="multipart/form-data" method="POST">{% csrf_token %}
+
+
+  <div class="input-group mb-3 col-6">
+    <div class="input-group-prepend">
+      <span class="input-group-text" id="basic-addon3">Codice</span>
+    </div>
+    <input type="text" class="form-control" id="{{form.code.id}}" aria-describedby="basic-addon3" name="code" value="{{form.code.value}}">
+  </div>
+
+  <div class="input-group col-6 mb-3">
+    <div class="input-group-prepend">
+      <span class="input-group-text">Descrizione</span>
+    </div>
+    <textarea class="form-control"  id="{{form.decription.id}}" name="description" >{{form.description.value}}</textarea>
+  </div>
+
+
+
+  <div class="input-group col-6">
+
+  <button class="btn btn btn-primary " type="submit" style="position: absolute; right: 0; margin-right: 15px"> Salva </button>
+  </div>
+</form>
+{%endblock content%}

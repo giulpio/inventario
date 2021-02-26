@@ -1,0 +1,16 @@
+{% extends "product/index.html" %}
+
+
+
+
+
+{% block content%}
+
+<form enctype="multipart/form-data" method="POST">{% csrf_token %}
+
+{%for f in form%}
+{{f}}
+{%endfor%}
+  <button type="submit">Conferma</button>
+</form>
+{%endblock content%}
